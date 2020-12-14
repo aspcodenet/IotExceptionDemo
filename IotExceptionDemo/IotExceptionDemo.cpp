@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <iostream>
 #include <exception>
 #include <vector>
@@ -31,7 +32,10 @@ public:
 		name = nam;
 		jersey = j;
 	}
-	
+	string GetName()
+	{
+		return name;
+	}
 	bool SetName(string nam)
 	{
 		if (nam.length() < 2)
@@ -39,6 +43,14 @@ public:
 		name = nam;
 		return  true;
 	}
+};
+
+class Team
+{
+public:
+	Team(string name) { Name = name; }
+	string Name;
+	vector<Player> Players;
 };
 
 template <class T>
@@ -75,6 +87,33 @@ T GetBiggestOf(T a, T  b)
 
 void main()
 {
+	Team a = Team("AIK");
+	a.Players.push_back(Player("aasdads", 12));
+	a.Players.push_back(Player("basdads", 13));
+	Team ab= Team("DIF");
+	ab.Players.push_back(Player("cadsasddas", 13));
+	vector<Team> teams{
+		a,ab
+	
+	};
+
+	for_each(teams.begin(), teams.end(), [](Team t)
+		{
+			cout << t.Name << endl;
+			for_each(t.Players.begin(), t.Players.end(), [t](Player p)
+				{
+					cout << "Igall du glömt: laget vi listar just nu hetrer " << t.Name << endl;
+					cout << p.GetName() << endl;
+				});
+		});
+	
+	// TENTA: 24 frågor, 3 h
+	// Tre Algorithm                 * 3p
+	// En annan ... hmmm...??        * 3p
+	// 20st 1x2 frågor * 1p
+	
+	//nested lambda 14
+	
 	/*string s = "Apa";
 	string s2 = "Bok";
 	if(s < s2)
